@@ -2,11 +2,12 @@ from flask import Flask, request, jsonify
 import requests
 import csv
 import io
+import os
 
 app = Flask(__name__)
 
-# Your Discord webhook URL
-WEBHOOK_URL = "https://discord.com/api/webhooks/1312174281500655736/_DK4BgupYh0UZ0MN7XTe0WFMxGTGRulsb_USUoAmHPADARyU1m1Xnn6E7gOIHljloyQx"
+# Retrieve Discord webhook URL from Render secret
+WEBHOOK_URL = os.getenv("DISCORDWEBHOOK")
 
 @app.route("/game-upload", methods=["POST"])
 def game_upload():

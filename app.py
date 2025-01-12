@@ -29,22 +29,22 @@ def game_upload():
 
         # Create Roblox user and group links
         user_link = f"https://www.roblox.com/users/{user_id}/profile"
-        group_link = f"https://www.roblox.com/communities/{group_id}/{group_name}/about"
+        group_link = f"https://www.roblox.com/groups/{group_id}/about"
 
         # Construct the Discord embed
         embed = {
             "title": "New Game Uploaded to Roblox!",
-            "description": f"A new game has been uploaded to Roblox by [Roblox User]({user_link}).",
+            "description": f"A new game has been uploaded.",
             "color": 3066993,  # A nice green color
             "fields": [
                 {
                     "name": "Uploaded By",
-                    "value": f"[Roblox User]({user_link})",
+                    "value": f"[{username}]({user_link})\nUser ID: `{user_id}`",
                     "inline": True
                 },
                 {
                     "name": "Group",
-                    "value": f"[Roblox Group]({group_link})",
+                    "value": f"[{group_name}]({group_link})\nGroup ID: `{group_id}`",
                     "inline": True
                 }
             ],
@@ -75,7 +75,7 @@ def game_upload():
         if response.status_code == 204:
             return jsonify({"message": "Notification sent successfully!"}), 200
         else:
-            return jsonify({"error": "Failed to send notification to Discord."}), 500
+            return jsonify({"error": "Failed to send notification to Discord.", "details": response.text}), 500
 
     except Exception as e:
         return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500

@@ -71,15 +71,14 @@ def game_upload():
         csv_writer.writerow([username, user_id, group_id, group_name])
         csv_output.seek(0)
 
-        # Send the embed and CSV to Discord webhook
+        # Prepare the multipart/form-data payload
         files = {
-            "file": ("game_upload.csv", csv_output.read(), "text/csv")
-        }
-        payload = {
-            "embeds": [embed]
+            "file": ("game_upload.csv", csv_output.read(), "text/csv"),
+            "payload_json": (None, jsonify({"embeds": [embed]}).data, "application/json"),
         }
 
-        response = requests.post(WEBHOOK_URL, json=payload, files=files)
+        # Send the embed and CSV to Discord webhook
+        response = requests.post(WEBHOOK_URL, files=files)
 
         # Check if the webhook request was successful
         if response.status_code == 204:

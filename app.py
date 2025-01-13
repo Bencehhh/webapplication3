@@ -31,20 +31,30 @@ def game_upload():
         user_link = f"https://www.roblox.com/users/{user_id}/profile"
         group_link = f"https://www.roblox.com/groups/{group_id}/about"
 
-        # Construct the Discord embed
+        # Construct the Discord embed (matching your desired format)
         embed = {
-            "title": "New Game Uploaded to Roblox!",
-            "description": f"A new game has been uploaded.",
-            "color": 3066993,  # A nice green color
+            "title": "Moderation Log",
+            "description": "Server Activity Report",
+            "color": 3447003,  # Blue color
             "fields": [
                 {
-                    "name": "Uploaded By",
-                    "value": f"[{username}]({user_link})\nUser ID: `{user_id}`",
+                    "name": "Uploader",
+                    "value": f"[{username}]({user_link})",
+                    "inline": True
+                },
+                {
+                    "name": "User ID",
+                    "value": f"`{user_id}`",
                     "inline": True
                 },
                 {
                     "name": "Group",
-                    "value": f"[{group_name}]({group_link})\nGroup ID: `{group_id}`",
+                    "value": f"[{group_name}]({group_link})",
+                    "inline": True
+                },
+                {
+                    "name": "Group ID",
+                    "value": f"`{group_id}`",
                     "inline": True
                 }
             ],
